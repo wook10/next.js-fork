@@ -29,6 +29,17 @@ export default function Page() {
             /lazy-data-in-prefetch (prefetch=true)
           </LinkAccordion>
         </li>
+        <li>
+          {/* TODO: why does this correctly abort in a shell? */}
+          <LinkAccordion href="/dynamic-param/1">
+            /dynamic-param/1
+          </LinkAccordion>
+        </li>
+        <li>
+          <LinkAccordion href="/search-params-in-private-cache">
+            /search-params-in-private-cache
+          </LinkAccordion>
+        </li>
       </ul>
     </main>
   )
