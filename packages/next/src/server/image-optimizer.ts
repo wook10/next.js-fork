@@ -102,6 +102,7 @@ export function getSharp(concurrency: number | null | undefined) {
       )
     }
   } catch (e: unknown) {
+    console.log('failed to load sharp', e)
     if (isError(e) && e.code === 'MODULE_NOT_FOUND') {
       throw new Error(
         'Module `sharp` not found. Please run `npm install --cpu=wasm32 sharp` to install it.'
@@ -142,8 +143,11 @@ function canDecodeAvif(concurrency: number | null | undefined): boolean {
     try {
       // Custom libvips builds do not report dependency versions, so the
       // absence of a heif version is treated as unsafe.
-      heifVersion = getSharp(concurrency).versions?.heif ?? null
-    } catch {
+      const sharp = getSharp(concurrency);
+      console.log('sharp', sharp)
+      heifVersion = sharp.versions?.heif ?? null
+    } catch (e) {
+      console.log('failed to get sharp versions', e)
       // Without sharp no AVIF can be decoded either, so treat it as unsafe
       // and let the image pass through unoptimized.
       heifVersion = null
