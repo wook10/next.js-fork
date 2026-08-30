@@ -622,6 +622,8 @@ describe('app-custom-routes', () => {
 
       const url = 'http://localhost:3000/dynamic'
 
+      console.log(Object.fromEntries(res.headers.entries()))
+
       expect(res.status).toEqual(200)
       expect(await res.json()).toEqual({
         nextUrl: {
